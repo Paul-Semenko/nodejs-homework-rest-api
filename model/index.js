@@ -16,7 +16,7 @@ const getContactById = async (contactId) => {
     return contact
 }
 
-const removeContact = async (contactId) => {
+function removeContact (contactId){
     const deleteContact = contacts.findIndex(contact => contact.id === contactId)
     if (deleteContact !== -1) {
       const [result] = contacts.splice(deleteContact, 1)
@@ -28,12 +28,8 @@ const removeContact = async (contactId) => {
   return null
     }
 
-const addContact = async (userData) => {
-    const{name, email, phone}=userData
-    if (!Object.values(userData).every((userData) => userData)) {
-        return "operation failed, user data is missing!"
-    }    
-    const newContact = { name, email, phone, id: uuidv4()}
+const addContact = async ({name, email, phone}) => {
+  const newContact = { name, email, phone, id: uuidv4()}
     contacts.push(newContact)
     await fs.writeFile(path.join(__dirname, 'contacts.json'),
         JSON.stringify(contacts, null, 2),
@@ -44,7 +40,7 @@ const addContact = async (userData) => {
 const updateContact = async (contactId, body) => {
   const index = contacts.findIndex((contact) => contact.id === contactId)
   if (index !== -1) {
-    const updatedContact = { id: contactId, ...contacts[index], ...body }
+    const updatedContact = {...contacts[index], ...body }
     contacts[index] = updatedContact
     await fs.writeFile(path.join(__dirname, 'contacts.json'),
       JSON.stringify(contacts, null, 2))
