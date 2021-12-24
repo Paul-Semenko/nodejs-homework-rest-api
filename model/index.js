@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const listContacts = async () => {
+const listContacts = () => {
   return contacts
 }
 
@@ -16,7 +16,7 @@ const getContactById = async (contactId) => {
     return contact
 }
 
-function removeContact (contactId){
+const removeContact = async (contactId) => {
     const deleteContact = contacts.findIndex(contact => contact.id === contactId)
     if (deleteContact !== -1) {
       const [result] = contacts.splice(deleteContact, 1)
