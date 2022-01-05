@@ -5,7 +5,7 @@ import { HttpCode } from '../../lib/constants'
 const getContacts = async (req, res, next) => {
   const contacts = await repositoryContacts.listContacts() 
     res.status(HttpCode.OK)
-        .json({ status: 'success', code: HttpCode.OK, data: { ...contacts } })
+        .json({ status: 'success', code: HttpCode.OK, data: contacts})
 }
 
 const getContactById = async (req, res, next) => {
