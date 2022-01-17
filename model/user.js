@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
-import pkg from 'mongoose';
+import pkg from 'mongoose'
+import gravatar from 'gravatar/lib/gravatar'
 
   const { Schema, model } = pkg;
 
@@ -26,12 +27,18 @@ import pkg from 'mongoose';
     type: String,
     enum: ["starter", "pro", "business"],
     default: "starter"
-      },
-    
+      },    
     token: {
           type: String,
           default: null,
-      },   
+    },  
+    avatar: {
+      type: String,
+      default: function () {
+        return gravatar.url(this.email, {s: '250'}, true)
+        
+      },
+    },
       
   },
       {
