@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import pkg from 'mongoose'
 import gravatar from 'gravatar/lib/gravatar'
+import { v4 as uuidv4 } from 'uuid'
 
   const { Schema, model } = pkg;
 
@@ -39,6 +40,14 @@ import gravatar from 'gravatar/lib/gravatar'
         
       },
     },
+    verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,    
+    default: uuidv4(),
+  },
       
   },
       {
