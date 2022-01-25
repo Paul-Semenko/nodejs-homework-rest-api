@@ -46,7 +46,9 @@ import { v4 as uuidv4 } from 'uuid'
   },
   verificationToken: {
     type: String,    
-    default: uuidv4(),
+    default: function () {
+      return uuidv4()
+    },
   },
       
   },
